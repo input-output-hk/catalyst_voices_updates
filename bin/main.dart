@@ -20,8 +20,9 @@ Future<void> main(List<String> arguments) async {
     ))
     ..plugin(RssPlugin(
       site: RssSiteConfiguration(
-        title: "Catalyts Voices Updates",
-        description: "Discover the latest features in our Catalyst Voices apps.",
+        title: "Catalyst Voices Updates",
+        description:
+            "Discover the latest features in our Catalyst Voices apps.",
         homePageUrl: "",
       ),
       pageToRssItemMapper: (RssSiteConfiguration config, Page page) {
