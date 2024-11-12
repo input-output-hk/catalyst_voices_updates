@@ -1,6 +1,6 @@
 ---
 title: The Power of Positive Thinking - Transform Your Mindset
-description: <video src="https://www.shutterstock.com/shutterstock/videos/3434489259/preview/stock-footage-creative-office-professional-female-programmer-uses-headphones-working-on-desktop-computer.webm" controls autoplay muted> muted</video> Discover the benefits of positive thinking and learn how to cultivate a more optimistic mindset for a happier life.
+description: <video src="https://www.shutterstock.com/shutterstock/videos/3434489259/preview/stock-footage-creative-office-professional-female-programmer-uses-headphones-working-on-desktop-computer.webm" controls autoplay muted> muted </video> Discover the benefits of positive thinking and learn how to cultivate a more optimistic mindset for a happier life.
 publishDate: 2024-10-14
 ---
 # The Power of Positive Thinking: Transform Your Mindset
