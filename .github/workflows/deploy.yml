@@ -23,16 +23,30 @@ jobs:
       - name: Setup Dart
         uses: dart-lang/setup-dart@v1
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Cache Dart packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
+
       - name: Install dependencies
         run: dart pub get
 
       - name: Build site
         run: dart run bin/main.dart
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: build
+          retention-days: 7
 
   deploy-production:
     needs: build
@@ -56,6 +70,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+        with:
+          timeout: 600000
 
   deploy-preview:
     needs: build
@@ -85,15 +101,21 @@ jobs:
       - name: Deploy Preview
         id: deployment
         uses: actions/deploy-pages@v2
+        with:
+          timeout: 600000
 
       - name: Add Preview URL Comment
         uses: actions/github-script@v6
+        env:
+          PREVIEW_URL: ${{ steps.deployment.outputs.page_url }}
         with:
           script: |
-            const preview_url = `https://${context.repo.owner}.github.io/${context.repo.repo}/pr-preview/pr-${context.issue.number}`;
-            github.rest.issues.createComment({
+            const preview_url = process.env.PREVIEW_URL ||
+              `https://${context.repo.owner}.github.io/${context.repo.repo}/pr-preview/pr-${context.issue.number}`;
+
+            await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `🚀 Preview deployment is ready!\nURL: ${preview_url}`
+              body: `🚀 Preview deployment is ready!\nURL: ${preview_url}\n\n> Note: This preview will be automatically updated as you make changes to your PR.`
             })
