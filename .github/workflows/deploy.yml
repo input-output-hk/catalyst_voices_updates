@@ -16,10 +16,6 @@ jobs:
       pages: write
       id-token: write
 
-    defaults:
-      run:
-        working-directory: ./packages/static_shock_docs
-
     steps:
       - uses: actions/checkout@v3
 
