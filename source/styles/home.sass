@@ -1,207 +1,208 @@
 // Variables
-$color-background: #FFFFFF;
-$color-text: #000000;
-$color-text-secondary: #666666;
-$border-radius-lg: 24px;
-$border-radius-sm: 8px;
+$colors: (background: #FFFFFF,
+  text: #000000,
+  text-secondary: #666666,
+  black: #000000,
+  white: #FFFFFF,
+  gray: #F2F2F2,
+  hover-black: #333333);
+
+$border-radius: (lg: 24px,
+  sm: 8px);
+
+$breakpoints: (desktop: 768px);
+
+$spacing: (xs: 6px,
+  sm: 8px,
+  md: 12px,
+  lg: 16px,
+  xl: 20px,
+  xxl: 24px,
+  xxxl: 40px,
+  mega: 48px);
+
+// Mixins
+@mixin flex($direction: row, $gap: map-get($spacing, sm)) {
+  display: flex;
+  flex-direction: $direction;
+  gap: $gap;
+}
+
+@mixin tag-style {
+  font-size: 13px;
+  padding: map-get($spacing, xs) map-get($spacing, md);
+  background: map-get($colors, gray);
+  border-radius: map-get($border-radius, sm);
+  color: map-get($colors, text);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@mixin desktop {
+  @media (min-width: map-get($breakpoints, desktop)) {
+    @content;
+  }
+}
 
 // Base styles
 body {
   margin: 0;
   padding: 0;
-  background-color: $color-background;
-  color: $color-text;
+  background-color: map-get($colors, background);
+  color: map-get($colors, text);
   font-family: -apple-system, system-ui, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
-// Header
 header {
-  padding: 20px;
+  padding: map-get($spacing, xl);
 
   h1 {
     font-size: 32px;
     font-weight: 600;
-    margin: 0;
-    margin-bottom: 40px;
+    margin: 0 0 map-get($spacing, xxxl);
   }
 }
 
-// Main content
 main {
   min-height: 100vh;
 }
 
 // Post list
 .post-list {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
+  @include flex(column, map-get($spacing, mega));
   max-width: 100%;
-  margin: 0;
+  margin: map-get($spacing, sm);
   padding: 0;
   list-style: none;
+
+  @include desktop {
+    max-width: 800px;
+    margin: 0 auto;
+  }
 }
 
 // Post
 .post {
-  padding: 0 20px;
+  padding: 0 map-get($spacing, xl);
 
-  // Handle direct video elements from markdown
-  video {
-    width: calc(100% + 40px);
-    margin-left: -20px;
-    margin-right: -20px;
-    margin-bottom: 24px;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    background: #000;
-    border-radius: $border-radius-lg;
-    
-    @media (min-width: 768px) {
-      width: 100%;
-      margin-left: 0;
-      margin-right: 0;
-      border-radius: $border-radius-sm;
-    }
+  @include desktop {
+    padding: 0;
   }
 }
 
-// Post meta (date and category)
-.post-meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+// Media elements
+%media-full-width {
+  width: calc(100% + #{2 * map-get($spacing, xl)});
+  margin: 0 (-#{map-get($spacing, xl)}) map-get($spacing, xxl);
+  border-radius: map-get($border-radius, lg);
 }
 
-// Date with icon
+video {
+  @extend %media-full-width;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: map-get($colors, black);
+
+  @include desktop {
+    width: 100%;
+    margin: map-get($spacing, sm);
+    border-radius: map-get($border-radius, lg);
+  }
+}
+
+// Post meta
+.post-meta {
+  @include flex(row, map-get($spacing, md));
+  margin-bottom: map-get($spacing, lg);
+}
+
 .date {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: $color-text;
+  @include flex(row, map-get($spacing, sm));
+  color: map-get($colors, text);
   font-size: 16px;
 }
 
-// Category tag
 .category {
-  font-size: 13px;
-  padding: 6px 12px;
-  background: #F2F2F2;
-  border-radius: 8px;
-  color: $color-text;
-  text-transform: uppercase;
-  font-weight: 500;
+  @include tag-style;
 }
 
-// Title
+// Post content
 .title {
   font-size: 28px;
   font-weight: 600;
-  margin: 0 0 24px;
-  color: $color-text;
+  margin: 0 0 map-get($spacing, xxl);
+  color: map-get($colors, text);
   line-height: 1.3;
+
+  @include desktop {
+    font-size: 32px;
+  }
 }
 
-// Media wrapper (for both images and wrapper videos)
 .post-image {
-  width: calc(100% + 40px);
-  margin-left: -20px;
-  margin-right: -20px;
-  margin-bottom: 24px;
-  border-radius: $border-radius-lg;
+  @extend %media-full-width;
   overflow: hidden;
-  background: #000;
-  
-  img {
+  background: map-get($colors, black);
+
+  @include desktop {
     width: 100%;
-    height: auto;
-    display: block;
+    margin: 0;
+    border-radius: map-get($border-radius, sm);
   }
-  
+
+  img,
   video {
     width: 100%;
-    aspect-ratio: 16 / 9;
     display: block;
+  }
+
+  video {
+    aspect-ratio: 16 / 9;
     object-fit: cover;
   }
 }
 
-// Description
 .description {
   font-size: 16px;
   line-height: 1.6;
-  color: $color-text;
-  margin: 0 0 24px;
-  
+  color: map-get($colors, text);
+  margin: 0 0 map-get($spacing, xxl);
+
   p {
     margin: 0;
   }
 }
 
-// Read more button
+// Interactive elements
 .read-more {
   display: inline-block;
-  padding: 12px 24px;
-  background: #000;
-  color: #fff;
+  padding: map-get($spacing, md) map-get($spacing, xxl);
+  background: map-get($colors, black);
+  color: map-get($colors, white);
   text-decoration: none;
-  border-radius: $border-radius-sm;
+  border-radius: map-get($border-radius, sm);
   font-size: 15px;
   font-weight: 500;
   transition: background-color 0.2s ease;
-  
+
   &:hover {
-    background: #333;
+    background: map-get($colors, hover-black);
+  }
+
+  @media print {
+    display: none;
   }
 }
 
 // Tags
 .tags {
-  display: flex;
-  gap: 8px;
+  @include flex(row, map-get($spacing, sm));
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: map-get($spacing, xl);
 }
 
 .tag {
-  font-size: 13px;
-  padding: 6px 12px;
-  background: #F2F2F2;
-  border-radius: 8px;
-  color: $color-text;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-// Desktop styles
-@media (min-width: 768px) {
-  .post-list {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .post {
-    padding: 0;
-  }
-
-  .post-image {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    border-radius: $border-radius-sm;
-  }
-
-  .title {
-    font-size: 32px;
-  }
-}
-
-// Print styles
-@media print {
-  .read-more {
-    display: none;
-  }
+  @include tag-style;
 }

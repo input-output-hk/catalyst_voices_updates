@@ -24,54 +24,76 @@ title: Catalyst Voices Updates
 </head>
 
 <body>
-  <header>
-    <h1>{{ title }}</h1>
-  </header>
-
-  <main>
+  <div class="wrapper">
     <div class="post-list">
       {% for page in pages.byTag("posts", sortBy="publishDate=desc") %}
       <article class="post">
+        <!-- Left column with timeline -->
         <div class="post-meta">
-          <time class="date">{{ page.data['publishDate'] }}</time>
-          <span class="category">posts</span>
-        </div>
+          <time class="date">
+            {{ page.data['publishDate'] }}
+          </time>
 
-        <h2 class="title">{{ page.data['title'] }}</h2>
+          <h2 class="title">{{ page.data['title'] }}</h2>
 
-        {% if page.data['coverImage'] %}
-        <div class="post-image">
-          {% if page.data['isVideo'] %}
-          <video
-            controls
-            playsinline
-            poster="{{ page.data['videoPoster'] }}"
-          >
-            <source src="{{ page.data['coverImage'] }}" type="video/mp4">
-            Your browser doesn't support HTML5 video.
-          </video>
-          {% else %}
-          <img
-            src="{{ page.data['coverImage'] }}"
-            alt="{{ page.data['title'] }}"
-            loading="lazy"
-          >
+          {% if page.data['platforms'] %}
+          <div class="platform-tags">
+            {% for platform in page.data['platforms'] %}
+            <span class="platform-tag">{{ platform }}</span>
+            {% endfor %}
+          </div>
           {% endif %}
         </div>
-        {% endif %}
 
-        {% if page.data['description'] %}
-        <div class="description">
-          <p>{{ page.data['description'] }}</p>
+        <!-- Right column with content -->
+        <div class="post-content">
+          {% if page.data['coverImage'] %}
+          <div class="post-media">
+            {% if page.data['isVideo'] %}
+            <video
+              controls
+              playsinline
+              poster="{{ page.data['videoPoster'] }}"
+            >
+              <source src="{{ page.data['coverImage'] }}" type="video/mp4">
+              Your browser doesn't support HTML5 video.
+            </video>
+            {% else %}
+            <img 
+              src="{{ page.data['coverImage'] }}" 
+              alt="{{ page.data['title'] }}"
+              loading="lazy"
+            >
+            {% endif %}
+          </div>
+          {% endif %}
+
+          {% if page.data['description'] %}
+          <div class="description">
+            <p>{{ page.data['description'] }}</p>
+          </div>
+          {% endif %}
+
+          <a href="{{ page.data['url'] }}" class="read-more">Read the blog post</a>
         </div>
-        {% endif %}
-
-        <a href="{{ page.data['url'] }}" class="read-more">Read the blog post</a>
       </article>
       {% endfor %}
     </div>
-  </main>
+  </div>
 
-  {{ components.footer() }}
+  <script>
+    // Copy link functionality
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+          button.setAttribute('aria-label', 'Link copied!');
+          setTimeout(() => {
+            button.setAttribute('aria-label', 'Copy link to this post');
+          }, 2000);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
