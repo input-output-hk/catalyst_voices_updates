@@ -96,11 +96,11 @@ jobs:
 
     steps:
       - name: Configure Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
       - name: Deploy Preview
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
         with:
           timeout: 600000
 
