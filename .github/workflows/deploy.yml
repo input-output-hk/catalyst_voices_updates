@@ -10,15 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-      pages: write
-      id-token: write
-
-    outputs:
-      page_url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -32,35 +23,50 @@ jobs:
       - name: Build site
         run: dart run bin/main.dart
 
-      - name: Debug directory
-        run: |
-          echo "Contents of current directory:"
-          ls -la
-          echo "Contents of build directory:"
-          ls -la build || echo "Build directory not found"
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: build
 
+  deploy-production:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
       - name: Deploy to GitHub Pages
         id: deployment
-        if: github.ref == 'refs/heads/main'
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v2
 
-  preview:
+  deploy-preview:
     needs: build
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+
     permissions:
       pull-requests: write
 
+    environment:
+      name: preview
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - name: Comment PR
+      - name: Deploy Preview
+        id: deployment
+        uses: actions/deploy-pages@v2
+
+      - name: Add Preview URL Comment
         uses: actions/github-script@v6
         with:
           script: |
