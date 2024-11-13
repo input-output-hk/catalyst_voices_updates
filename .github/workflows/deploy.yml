@@ -82,51 +82,51 @@ jobs:
         with:
           artifact_name: github-pages
 
-  deploy-preview:
-    needs: build
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+  # deploy-preview:
+  #   needs: build
+  #   if: github.event_name == 'pull_request'
+  #   runs-on: ubuntu-latest
 
-    permissions:
-      pages: write
-      id-token: write
-      pull-requests: write
-      deployments: write
-      statuses: write
-      contents: read
+  #   permissions:
+  #     pages: write
+  #     id-token: write
+  #     pull-requests: write
+  #     deployments: write
+  #     statuses: write
+  #     contents: read
 
-    environment:
-      name: preview
-      url: ${{ steps.deployment.outputs.page_url }}
+  #   environment:
+  #     name: preview
+  #     url: ${{ steps.deployment.outputs.page_url }}
 
-    concurrency:
-      group: "pages-pr-${{ github.event.pull_request.number }}"
-      cancel-in-progress: true
+  #   concurrency:
+  #     group: "pages-pr-${{ github.event.pull_request.number }}"
+  #     cancel-in-progress: true
 
-    steps:
-      - name: Configure Pages
-        uses: actions/configure-pages@v4
+  #   steps:
+  #     - name: Configure Pages
+  #       uses: actions/configure-pages@v4
 
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: build
+  #     - name: Download artifact
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: github-pages
+  #         path: build
 
-      - name: Deploy Preview
-        id: deployment
-        uses: actions/deploy-pages@v2
-        with:
-          artifact_name: github-pages
+  #     - name: Deploy Preview
+  #       id: deployment
+  #       uses: actions/deploy-pages@v2
+  #       with:
+  #         artifact_name: github-pages
 
-      - name: Add Preview URL Comment
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const preview_url = `https://${context.repo.owner}.github.io/${context.repo.repo}/pr-preview/pr-${context.issue.number}`;
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: `🚀 Preview deployment is ready!\nURL: ${preview_url}`
-            })
+  #     - name: Add Preview URL Comment
+  #       uses: actions/github-script@v6
+  #       with:
+  #         script: |
+  #           const preview_url = `https://${context.repo.owner}.github.io/${context.repo.repo}/pr-preview/pr-${context.issue.number}`;
+  #           github.rest.issues.createComment({
+  #             owner: context.repo.owner,
+  #             repo: context.repo.repo,
+  #             issue_number: context.issue.number,
+  #             body: `🚀 Preview deployment is ready!\nURL: ${preview_url}`
+  #           })
