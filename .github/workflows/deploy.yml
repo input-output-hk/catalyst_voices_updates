@@ -106,12 +106,9 @@ jobs:
 
       - name: Add Preview URL Comment
         uses: actions/github-script@v6
-        env:
-          PREVIEW_URL: ${{ steps.deployment.outputs.page_url }}
         with:
           script: |
-            const preview_url = process.env.PREVIEW_URL ||
-              `https://${context.repo.owner}.github.io/${context.repo.repo}/pr-preview/pr-${context.issue.number}`;
+            const preview_url = '${{ steps.deployment.outputs.page_url }}';
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
