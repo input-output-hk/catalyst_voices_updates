@@ -88,7 +88,7 @@ jobs:
 
     environment:
       name: preview
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.preview_url }}
 
     concurrency:
       group: "pages-pr-${{ github.event.pull_request.number }}"
@@ -108,7 +108,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const preview_url = '${{ steps.deployment.outputs.page_url }}';
+            const preview_url = '${{ steps.deployment.outputs.preview_url }}';
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
