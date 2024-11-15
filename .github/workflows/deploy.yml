@@ -108,7 +108,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const preview_url = '${{ steps.deployment.outputs.preview_url }}';
+            const preview_url = `https://${{ github.actor }}--${{ github.event.repository.name }}--${{ github.event.pull_request.number }}.preview.app.github.dev/`;
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
