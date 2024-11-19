@@ -117,3 +117,6 @@ jobs:
         with:
           dir: ./build/
           action: auto
+          force: false
+          preview-branch: gh-pages
+          clean-exclude: pr-preview/
