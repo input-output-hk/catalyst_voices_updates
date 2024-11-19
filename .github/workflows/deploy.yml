@@ -95,24 +95,5 @@ jobs:
       cancel-in-progress: true
 
     steps:
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Deploy Preview
-        id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          timeout: 600000
-
-      - name: Add Preview URL Comment
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const preview_url = `https://${{ github.actor }}--${{ github.event.repository.name }}--${{ github.event.pull_request.number }}.preview.app.github.dev/`;
-
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: `🚀 Preview deployment is ready!\nURL: ${preview_url}\n\n> Note: This preview will be automatically updated as you make changes to your PR.`
-            })
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
