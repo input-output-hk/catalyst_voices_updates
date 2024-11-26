@@ -3,6 +3,7 @@ title: Catalyst Voices Updates
 -->
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>{{ title }}</title>
@@ -19,8 +20,8 @@ title: Catalyst Voices Updates
   <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
   <meta name="theme-color" content="#ffffff">
 
-  <link href="/styles/styles.css" rel="stylesheet">
-  <link href="/styles/home.css" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/styles.css">
+  <link rel="stylesheet" href="/styles/home.css">
 </head>
 
 <body>
@@ -50,20 +51,12 @@ title: Catalyst Voices Updates
           {% if page.data['coverImage'] %}
           <div class="post-media">
             {% if page.data['isVideo'] %}
-            <video
-              controls
-              playsinline
-              poster="{{ page.data['videoPoster'] }}"
-            >
+            <video controls playsinline poster="{{ page.data['videoPoster'] }}">
               <source src="{{ page.data['coverImage'] }}" type="video/mp4">
               Your browser doesn't support HTML5 video.
             </video>
             {% else %}
-            <img
-              src="{{ page.data['coverImage'] }}" 
-              alt="{{ page.data['title'] }}"
-              loading="lazy"
-            >
+            <img src="{{ page.data['coverImage'] }}" alt="{{ page.data['title'] }}" loading="lazy">
             {% endif %}
           </div>
           {% endif %}
@@ -82,7 +75,6 @@ title: Catalyst Voices Updates
   </div>
 
   <script>
-    // Copy link functionality
     document.querySelectorAll('.copy-button').forEach(button => {
       button.addEventListener('click', () => {
         const url = window.location.href;
@@ -96,4 +88,5 @@ title: Catalyst Voices Updates
     });
   </script>
 </body>
+
 </html>
