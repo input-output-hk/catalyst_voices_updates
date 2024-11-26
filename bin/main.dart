@@ -1,7 +1,6 @@
 import 'package:static_shock/static_shock.dart';
 
 Future<void> main(List<String> arguments) async {
-  // Configure the static website generator.
   final staticShock = StaticShock()
     // Here, you can directly hook into the StaticShock pipeline. For example,
     // you can copy an "images" directory from the source set to build set:
@@ -15,22 +14,26 @@ Future<void> main(List<String> arguments) async {
     ..plugin(const PrettyUrlsPlugin())
     ..plugin(const RedirectsPlugin())
     ..plugin(const SassPlugin())
-    ..plugin(DraftingPlugin(
-      showDrafts: arguments.contains("preview"),
-    ))
-    ..plugin(RssPlugin(
-      site: RssSiteConfiguration(
-        title: "Catalyst Voices Updates",
-        description:
-            "Discover the latest features in our Catalyst Voices apps.",
-        homePageUrl: "",
+    ..plugin(
+      DraftingPlugin(
+        showDrafts: arguments.contains("preview"),
       ),
-      pageToRssItemMapper: (RssSiteConfiguration config, Page page) {
-        return defaultPageToRssItemMapper(config, page)?.copyWith(
-          author: page.data["author"],
-        );
-      },
-    ));
+    )
+    ..plugin(
+      RssPlugin(
+        site: RssSiteConfiguration(
+          title: "Catalyst Voices Updates",
+          description:
+              "Discover the latest features in our Catalyst Voices apps.",
+          homePageUrl: "",
+        ),
+        pageToRssItemMapper: (RssSiteConfiguration config, Page page) {
+          return defaultPageToRssItemMapper(config, page)?.copyWith(
+            author: page.data["author"],
+          );
+        },
+      ),
+    );
 
   // Generate the static website.
   await staticShock.generateSite();
