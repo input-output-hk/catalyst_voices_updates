@@ -113,3 +113,4 @@ $RECYCLE.BIN/
 ### Firebase Patch ###
 .runtimeconfig.json
 .firebase/
+*.log
