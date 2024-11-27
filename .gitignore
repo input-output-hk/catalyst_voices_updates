@@ -104,3 +104,12 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+### Firebase ###
+.idea
+**/node_modules/*
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
+*.log
