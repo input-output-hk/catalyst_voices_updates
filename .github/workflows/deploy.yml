@@ -106,28 +106,3 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           expires: 30d
-
-      - name: Find Comment
-        uses: peter-evans/find-comment@v3
-        id: fc
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          comment-author: "github-actions[bot]"
-          body-includes: "Preview Deployment"
-
-      - name: Create or Update Comment
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          comment-id: ${{ steps.fc.outputs.comment-id }}
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            ## Preview Deployment
-            ✨ Your preview deployment is ready!
-
-            🔗 URLs:
-            ${{ steps.deploy_preview.outputs.urls }}
-
-            ⏰ Preview expires: ${{ steps.deploy_preview.outputs.expire_time_formatted }}
-
-            📝 Details: ${{ steps.deploy_preview.outputs.details_url }}
-          edit-mode: replace
