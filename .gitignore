@@ -108,7 +108,6 @@ $RECYCLE.BIN/
 ### Firebase ###
 .idea
 **/node_modules/*
-**/.firebaserc
 
 ### Firebase Patch ###
 .runtimeconfig.json
