@@ -24,7 +24,34 @@ title: Catalyst Voices Updates
   <link rel="stylesheet" href="/styles/home.css">
 </head>
 
-<body class="bg-gradient">
+<body>
+  <!-- Main header -->
+  <nav class="top-nav" id="mainNav">
+    <div class="nav-content">
+      <div class="logo">
+        <img src="/images/logo.svg" alt="Project Catalyst Logo" class="logo-image">
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sticky header (shows on scroll) -->
+  <nav class="sticky-nav" id="stickyNav">
+    <div class="nav-content">
+      <h1 class="sticky-title">Catalyst Voices: What's <span class="accent">New</span></h1>
+    </div>
+  </nav>
+
+  <!-- Hero section -->
+  <header class="hero-section" id="heroSection">
+    <h1 class="hero-title">
+      Catalyst Voices: What's <span class="accent">New</span>
+    </h1>
+    <p class="hero-subtitle">
+      Learn from our experts and read the latest news on our blog.
+    </p>
+  </header>
+
+  <!-- Main content -->
   <div class="wrapper">
     <div class="post-list">
       {% if pages and pages.byTag %}
@@ -81,6 +108,35 @@ title: Catalyst Voices Updates
       {% endif %}
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const mainNav = document.getElementById('mainNav');
+      const stickyNav = document.getElementById('stickyNav');
+      const heroSection = document.getElementById('heroSection');
+      let lastScrollTop = 0;
+
+      window.addEventListener('scroll', function () {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+
+        if (scrollTop >= heroBottom) {
+          mainNav.classList.add('nav-hidden');
+          stickyNav.classList.add('nav-visible');
+        } else {
+          mainNav.classList.remove('nav-hidden');
+          stickyNav.classList.remove('nav-visible');
+        }
+
+        if (scrollTop > lastScrollTop && scrollTop > heroBottom) {
+          stickyNav.classList.add('nav-up');
+        } else {
+          stickyNav.classList.remove('nav-up');
+        }
+        lastScrollTop = scrollTop;
+      });
+    });
+  </script>
 </body>
 
 </html>
