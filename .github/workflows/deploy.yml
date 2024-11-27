@@ -45,6 +45,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build
+
   deploy-production:
     needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -57,25 +63,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm install -g firebase-tools
+
+      - name: Download a single artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           channelId: live
 
-  deploy-preview:
-    needs: build
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+  # deploy-preview:
+  #   needs: build
+  #   if: github.event_name == 'pull_request'
+  #   runs-on: ubuntu-latest
 
-    concurrency:
-      group: "pr-${{ github.event.pull_request.number }}"
-      cancel-in-progress: true
+  #   concurrency:
+  #     group: "pr-${{ github.event.pull_request.number }}"
+  #     cancel-in-progress: true
 
-    steps:
-      - uses: actions/checkout@v4
-      - run: npm install -g firebase-tools
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-          expires: 30d
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - run: npm install -g firebase-tools
+  #     - uses: FirebaseExtended/action-hosting-deploy@v0
+  #       with:
+  #         repoToken: "${{ secrets.GITHUB_TOKEN }}"
+  #         firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+  #         expires: 30d
