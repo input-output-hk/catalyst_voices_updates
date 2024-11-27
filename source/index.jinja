@@ -24,18 +24,23 @@ title: Catalyst Voices Updates
   <link rel="stylesheet" href="/styles/home.css">
 </head>
 
-<body>
+<body class="bg-gradient">
   <div class="wrapper">
     <div class="post-list">
+      {% if pages and pages.byTag %}
       {% for page in pages.byTag("posts", sortBy="publishDate=desc") %}
       <article class="post">
-        <!-- Left column with timeline -->
+        <!-- Left column with metadata -->
         <div class="post-meta">
-          <time class="date">
+          {% if page.data['publishDate'] %}
+          <time class="date" datetime="{{ page.data['publishDate'] }}">
             {{ page.data['publishDate'] }}
           </time>
+          {% endif %}
 
+          {% if page.data['title'] %}
           <h2 class="title">{{ page.data['title'] }}</h2>
+          {% endif %}
 
           {% if page.data['platforms'] %}
           <div class="platform-tags">
@@ -49,7 +54,7 @@ title: Catalyst Voices Updates
         <!-- Right column with content -->
         <div class="post-content">
           {% if page.data['coverImage'] %}
-          <div class="post-media">
+          <div class="post-media {% if page.data['isVideo'] %}video-container{% endif %}">
             {% if page.data['isVideo'] %}
             <video controls playsinline poster="{{ page.data['videoPoster'] }}">
               <source src="{{ page.data['coverImage'] }}" type="video/mp4">
@@ -67,26 +72,15 @@ title: Catalyst Voices Updates
           </div>
           {% endif %}
 
+          {% if page.data['url'] %}
           <a href="{{ page.data['url'] }}" class="read-more">Read the blog post</a>
+          {% endif %}
         </div>
       </article>
       {% endfor %}
+      {% endif %}
     </div>
   </div>
-
-  <script>
-    document.querySelectorAll('.copy-button').forEach(button => {
-      button.addEventListener('click', () => {
-        const url = window.location.href;
-        navigator.clipboard.writeText(url).then(() => {
-          button.setAttribute('aria-label', 'Link copied!');
-          setTimeout(() => {
-            button.setAttribute('aria-label', 'Copy link to this post');
-          }, 2000);
-        });
-      });
-    });
-  </script>
 </body>
 
 </html>
