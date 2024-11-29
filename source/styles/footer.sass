@@ -1,0 +1,21 @@
+@use 'theme' as *;
+@use "sass:map";
+
+.footer {
+  width: 100%;
+  padding: 1rem 0;
+  border-top: 1px solid #EAECF0;
+  margin-top: auto;
+  color:white
+
+}
+
+.footer-content {
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.copyright {
+  @include typography("body");
+  color: get-color("text-light");
+}
