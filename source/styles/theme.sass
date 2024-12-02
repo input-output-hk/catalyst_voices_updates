@@ -1,6 +1,5 @@
 @use "sass:map";
 
-// Colors
 $colors: (
   primary-blue: #113CD3,
   timeline-blue: #1444EF,
@@ -11,119 +10,67 @@ $colors: (
   footer-txt: #212A3D
 );
 
-// Font Families
 $font-families: (
-  primary: ('Noto Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif),
-  titles: ('Poppins', sans-serif),
-  accent: ('Roboto', sans-serif)
+  primary: ('Noto Sans', system-ui, -apple-system, sans-serif),
+  titles: ('Poppins', sans-serif)
 );
 
-// Font Sizes
 $font-sizes: (
-  xs: 0.875rem,    // 14px
-  sm: 1rem,        // 16px
-  base: 1.125rem,  // 18px
-  lg: 1.5rem,      // 24px
-  xl: 2.5rem,      // 40px
-  '2xl': 3.5rem    // 56px
+  xs: .875rem,
+  sm: 1rem,
+  base: 1.125rem,
+  lg: 1.5rem,
+  xl: 2.5rem,
+  '2xl': 3.5rem
 );
 
-// Font Weights
-$font-weights: (
-  regular: 400,
-  medium: 500,
-  semibold: 600,
-  bold: 700
-);
-
-// Layout
-$layout: (
-  max-width: 1200px,
-  content-width: 720px,
-  meta-width: 280px
-);
-
-// Spacing
 $spacing: (
-  xs: 0.5rem,    // 8px
-  sm: 1rem,      // 16px
-  md: 1.5rem,    // 24px
-  lg: 2rem,      // 32px
-  xl: 4rem       // 64px
+  xs: .5rem,
+  sm: 1rem,
+  md: 1.5rem,
+  lg: 2rem,
+  xl: 4rem
 );
 
-// Effects
-$background-gradient: linear-gradient(
-  135deg,
-  rgba(247, 237, 255, 1) 0%,
-  rgba(255, 255, 255, 1) 60%,
-  rgba(237, 240, 255, 1) 100%
-);
-
-// Typography Styles
 $typography-styles: (
   hero: (
     font-family: map.get($font-families, "primary"),
     font-size: 64px,
-    line-height: 64px,
+    line-height: 1,
     font-weight: 700,
-    letter-spacing: -0.02em
+    letter-spacing: -.02em
   ),
   title: (
     font-family: map.get($font-families, "titles"),
     font-size: 22px,
-    line-height: 28px,
+    line-height: 1.27,
     font-weight: 700,
-    letter-spacing: 0.03em
+    letter-spacing: .03em
   ),
   body: (
     font-family: map.get($font-families, "primary"),
     font-size: 16px,
-    line-height: 24px,
+    line-height: 1.5,
     font-weight: 500,
-    letter-spacing: 0.005em
+    letter-spacing: .005em
   ),
   label: (
     font-family: map.get($font-families, "primary"),
     font-size: 14px,
-    line-height: 20px,
+    line-height: 1.43,
     font-weight: 500,
-    letter-spacing: 0.1px
+    letter-spacing: .1px
   )
 );
 
-// Functions
-@function get-color($key) {
-  @return map.get($colors, $key);
-}
+$background-gradient: linear-gradient(135deg, rgba(247,237,255,1) 0%, rgba(255,255,255,1) 60%, rgba(237,240,255,1) 100%);
 
-@function get-font-family($key) {
-  @return map.get($font-families, $key);
-}
+@function get-color($key) { @return map.get($colors, $key); }
+@function get-spacing($key) { @return map.get($spacing, $key); }
 
-@function get-font-size($key) {
-  @return map.get($font-sizes, $key);
-}
-
-@function get-spacing($key) {
-  @return map.get($spacing, $key);
-}
-
-@function get-layout($key) {
-  @return map.get($layout, $key);
-}
-
-// Typography Mixin
 @mixin typography($style) {
   $settings: map.get($typography-styles, $style);
-  font-family: map.get($settings, "font-family");
-  font-size: map.get($settings, "font-size");
-  font-weight: map.get($settings, "font-weight");
-  line-height: map.get($settings, "line-height");
-  letter-spacing: map.get($settings, "letter-spacing");
-}
-
-Base styles
-body {
-  font-family: map.get($font-families, "primary");
+  @each $prop, $value in $settings {
+    #{$prop}: $value;
+  }
 }
