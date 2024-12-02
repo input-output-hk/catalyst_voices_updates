@@ -8,7 +8,7 @@
 
 .post-header {
   margin-bottom: get-spacing("xl");
-
+  
   .publish-date {
     @include typography("label");
     color: get-color("text-light");
@@ -19,13 +19,15 @@
     @include typography("hero");
     color: get-color("text-dark");
     margin-bottom: get-spacing("lg");
+    font-size: 64px;
+    line-height: 1.1;
   }
 }
 
 .post-meta {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: get-spacing("md");
   margin-bottom: get-spacing("xl");
 
   .author {
@@ -34,33 +36,36 @@
     gap: get-spacing("sm");
 
     img {
-      width: 40px;
-      height: 40px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
+      object-fit: cover;
     }
 
     .author-info {
       .name {
         @include typography("title");
         color: get-color("text-dark");
+        font-size: 24px;
+        margin-bottom: 4px;
       }
-      
+
       .role {
         @include typography("label");
         color: get-color("text-light");
       }
     }
   }
-  
+
   .share {
-    margin-left: auto;
     display: flex;
-    gap: get-spacing("sm");
-    
+    gap: get-spacing("md");
+
     a {
       color: get-color("text-light");
       text-decoration: none;
-      
+      font-size: 16px;
+
       &:hover {
         color: get-color("primary-blue");
       }
@@ -69,25 +74,26 @@
 }
 
 .post-content {
-  max-width: 800px;
-  margin: 0 auto;
-  
+  margin-top: get-spacing("xl");
+
   img, video {
     width: 100%;
-    border-radius: 20px;
+    border-radius: 12px;
     margin: get-spacing("lg") 0;
   }
-  
+
   h1, h2, h3 {
     @include typography("title");
     color: get-color("text-dark");
     margin: get-spacing("lg") 0 get-spacing("md");
   }
-  
+
   p {
     @include typography("body");
     color: get-color("text-light");
     margin-bottom: get-spacing("md");
+    font-size: 18px;
+    line-height: 1.6;
   }
 }
 
@@ -95,8 +101,14 @@
   .post-container {
     padding: get-spacing("lg") get-spacing("md");
   }
-  
+
   .post-header .post-title {
-    @include typography("title");
+    font-size: 40px;
+  }
+
+  .post-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: get-spacing("md");
   }
 }
