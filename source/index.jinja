@@ -6,87 +6,98 @@ title: Catalyst Voices Updates
 
 <head>
   <meta charset="utf-8">
+
   <title>{{ title }}</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Latest updates and news from Catalyst Voices">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-  <link rel="manifest" href="/images/favicon/site.webmanifest">
-  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-  <link rel="shortcut icon" href="/images/favicon/favicon.ico">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-  <meta name="theme-color" content="#ffffff">
+  {{ components.favicon() }}
 
-  <link rel="stylesheet" href="/styles/styles.css">
+  <link rel="stylesheet" href="/styles/theme.css">
+  <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/home.css">
+  <link rel="stylesheet" href="/styles/footer.css">
 </head>
 
 <body>
-  <div class="wrapper">
-    <div class="post-list">
-      {% for page in pages.byTag("posts", sortBy="publishDate=desc") %}
-      <article class="post">
-        <!-- Left column with timeline -->
-        <div class="post-meta">
-          <time class="date">
-            {{ page.data['publishDate'] }}
-          </time>
+  {{ components.header() }}
 
-          <h2 class="title">{{ page.data['title'] }}</h2>
+  <div class="main-container">
+    <!-- Hero section -->
+    <header class="hero-section" id="heroSection">
+      <h1 class="hero-title">
+        Catalyst Voices: What's <span class="accent">New</span>
+      </h1>
+      <p class="hero-subtitle">
+        Learn from our experts and read the latest news on our blog.
+      </p>
+    </header>
 
-          {% if page.data['platforms'] %}
-          <div class="platform-tags">
-            {% for platform in page.data['platforms'] %}
-            <span class="platform-tag">{{ platform }}</span>
-            {% endfor %}
-          </div>
-          {% endif %}
-        </div>
+    <!-- Main content -->
+    <div class="wrapper">
+      <div class="post-list">
+        {% if pages and pages.byTag %}
+        {% for page in pages.byTag("posts", sortBy="publishDate=desc") %}
+        <article class="post">
+          <!-- Left column with metadata -->
+          <div class="post-meta">
+            {% if page.data['publishDate'] %}
+            <time class="date" datetime="{{ page.data['publishDate'] }}">
+              {{ page.data['publishDate'] }}
+            </time>
+            {% endif %}
 
-        <!-- Right column with content -->
-        <div class="post-content">
-          {% if page.data['coverImage'] %}
-          <div class="post-media">
-            {% if page.data['isVideo'] %}
-            <video controls playsinline poster="{{ page.data['videoPoster'] }}">
-              <source src="{{ page.data['coverImage'] }}" type="video/mp4">
-              Your browser doesn't support HTML5 video.
-            </video>
-            {% else %}
-            <img src="{{ page.data['coverImage'] }}" alt="{{ page.data['title'] }}" loading="lazy">
+            {% if page.data['title'] %}
+            <h2 class="title">{{ page.data['title'] }}</h2>
+            {% endif %}
+
+            {% if page.data['platforms'] %}
+            <div class="platform-tags">
+              {% for platform in page.data['platforms'] %}
+              <span class="platform-tag">{{ platform }}</span>
+              {% endfor %}
+            </div>
             {% endif %}
           </div>
-          {% endif %}
 
-          {% if page.data['description'] %}
-          <div class="description">
-            <p>{{ page.data['description'] }}</p>
+          <!-- Right column with content -->
+          <div class="post-content">
+            {% if page.data['coverImage'] %}
+            <div class="post-wrapper">
+              <div class="post-media {% if page.data['isVideo'] %}video-container{% endif %}">
+                {% if page.data['isVideo'] %}
+                <div class="video-container">
+                  <video controls playsinline poster="{{ page.data['videoPoster'] }}">
+                    <source src="{{ page.data['coverImage'] }}" type="video/mp4">
+                    Your browser doesn't support HTML5 video.
+                  </video>
+                </div>
+                {% else %}
+                <img src="{{ page.data['coverImage'] }}" alt="{{ page.data['title'] }}" loading="lazy">
+                {% endif %}
+              </div>
+            </div>
+            {% endif %}
+
+            {% if page.data['description'] %}
+            <div class="description">
+              <p>{{ page.data['description'] }}</p>
+            </div>
+            {% endif %}
+
+            {% if page.data['url'] %}
+            <a href="{{ page.data['url'] }}" class="read-more">Read the blog post</a>
+            {% endif %}
           </div>
-          {% endif %}
-
-          <a href="{{ page.data['url'] }}" class="read-more">Read the blog post</a>
-        </div>
-      </article>
-      {% endfor %}
+        </article>
+        {% endfor %}
+        {% endif %}
+      </div>
     </div>
   </div>
 
-  <script>
-    document.querySelectorAll('.copy-button').forEach(button => {
-      button.addEventListener('click', () => {
-        const url = window.location.href;
-        navigator.clipboard.writeText(url).then(() => {
-          button.setAttribute('aria-label', 'Link copied!');
-          setTimeout(() => {
-            button.setAttribute('aria-label', 'Copy link to this post');
-          }, 2000);
-        });
-      });
-    });
-  </script>
+  {{ components.footer() }}
 </body>
 
 </html>

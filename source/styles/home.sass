@@ -1,208 +1,228 @@
-// Variables
-$colors: (background: #FFFFFF,
-  text: #000000,
-  text-secondary: #666666,
-  black: #000000,
-  white: #FFFFFF,
-  gray: #F2F2F2,
-  hover-black: #333333);
+@use 'sass:map';
+@use 'theme' as *;
 
-$border-radius: (lg: 24px,
-  sm: 8px);
-
-$breakpoints: (desktop: 768px);
-
-$spacing: (xs: 6px,
-  sm: 8px,
-  md: 12px,
-  lg: 16px,
-  xl: 20px,
-  xxl: 24px,
-  xxxl: 40px,
-  mega: 48px);
-
-// Mixins
-@mixin flex($direction: row, $gap: map-get($spacing, sm)) {
-  display: flex;
-  flex-direction: $direction;
-  gap: $gap;
-}
-
-@mixin tag-style {
-  font-size: 13px;
-  padding: map-get($spacing, xs) map-get($spacing, md);
-  background: map-get($colors, gray);
-  border-radius: map-get($border-radius, sm);
-  color: map-get($colors, text);
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-@mixin desktop {
-  @media (min-width: map-get($breakpoints, desktop)) {
-    @content;
-  }
-}
-
-// Base styles
 body {
   margin: 0;
   padding: 0;
-  background-color: map-get($colors, background);
-  color: map-get($colors, text);
-  font-family: -apple-system, system-ui, sans-serif;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-
-header {
-  padding: map-get($spacing, xl);
-
-  h1 {
-    font-size: 32px;
-    font-weight: 600;
-    margin: 0 0 map-get($spacing, xxxl);
-  }
-}
-
-main {
+  background: $background-gradient;
   min-height: 100vh;
+  background-attachment: fixed;
 }
 
-// Post list
-.post-list {
-  @include flex(column, map-get($spacing, mega));
-  max-width: 100%;
-  margin: map-get($spacing, sm);
-  padding: 0;
-  list-style: none;
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+  padding-top: get-spacing("xl");
+  gap: get-spacing("xl");
+}
 
-  @include desktop {
-    max-width: 800px;
+.hero {
+  &-section {
+    margin-top: 250px;
+    text-align: center;
+  }
+
+  &-title {
+    @include typography("hero");
+    color: get-color("text-dark");
+    margin-bottom: get-spacing("sm");
+    .accent { color: get-color("hero-purple"); }
+  }
+
+  &-subtitle {
+    @include typography("body");
+    color: get-color("text-light");
     margin: 0 auto;
   }
 }
 
-// Post
+.wrapper {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  padding: get-spacing("lg") get-spacing("xl");
+}
+
 .post {
-  padding: 0 map-get($spacing, xl);
+  &-list {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: get-spacing("xl");
+  }
 
-  @include desktop {
-    padding: 0;
+  display: grid;
+  grid-template-columns: 300px 600px;
+  justify-content: center;
+  gap: get-spacing("xl");
+
+  &-meta {
+    width: 300px;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto -4rem 0;
+      width: 2px;
+      background: get-color("timeline-blue");
+      opacity: .1;
+    }
+
+    .date {
+      position: relative;
+      display: inline-block;
+      color: black;
+      @include typography("label");
+      padding-left: get-spacing("md");
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 16px;
+        background: get-color("timeline-blue");
+        border-radius: 2px;
+      }
+    }
+
+    .title {
+      @include typography("title");
+      color: get-color("footer-txt");
+      margin-left: get-spacing("md");
+    }
+  }
+
+  &-content {
+    flex: 1;
+    max-width: 600;
+
+    .post-media {
+      width: 100%;
+      margin-bottom: get-spacing("lg");
+      border-radius: 20px;
+      overflow: hidden;
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%;
+        background: #000;
+        border-radius: 20px;
+
+        .video-wrapper {
+          position: absolute;
+          inset: 0;
+          border-radius: 20px;
+          overflow: hidden;
+
+          video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+    .description {
+      @include typography("body");
+      color: get-color("text-light");
+      margin-bottom: get-spacing("lg");
+    }
   }
 }
 
-// Media elements
-%media-full-width {
-  width: calc(100% + #{2 * map-get($spacing, xl)});
-  margin: 0 (-#{map-get($spacing, xl)}) map-get($spacing, xxl);
-  border-radius: map-get($border-radius, lg);
-}
-
-video {
-  @extend %media-full-width;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  background: map-get($colors, black);
-
-  @include desktop {
-    width: 100%;
-    margin: map-get($spacing, sm);
-    border-radius: map-get($border-radius, lg);
-  }
-}
-
-// Post meta
-.post-meta {
-  @include flex(row, map-get($spacing, md));
-  margin-bottom: map-get($spacing, lg);
-}
-
-.date {
-  @include flex(row, map-get($spacing, sm));
-  color: map-get($colors, text);
-  font-size: 16px;
-}
-
-.category {
-  @include tag-style;
-}
-
-// Post content
-.title {
-  font-size: 28px;
-  font-weight: 600;
-  margin: 0 0 map-get($spacing, xxl);
-  color: map-get($colors, text);
-  line-height: 1.3;
-
-  @include desktop {
-    font-size: 32px;
-  }
-}
-
-.post-image {
-  @extend %media-full-width;
-  overflow: hidden;
-  background: map-get($colors, black);
-
-  @include desktop {
-    width: 100%;
-    margin: 0;
-    border-radius: map-get($border-radius, sm);
-  }
-
-  img,
-  video {
-    width: 100%;
-    display: block;
-  }
-
-  video {
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-  }
-}
-
-.description {
-  font-size: 16px;
-  line-height: 1.6;
-  color: map-get($colors, text);
-  margin: 0 0 map-get($spacing, xxl);
-
-  p {
-    margin: 0;
-  }
-}
-
-// Interactive elements
 .read-more {
-  display: inline-block;
-  padding: map-get($spacing, md) map-get($spacing, xxl);
-  background: map-get($colors, black);
-  color: map-get($colors, white);
+  display: inline-flex;
+  padding: get-spacing("xs") get-spacing("md");
+  background: get-color("primary-blue");
+  color: white;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
-  border-radius: map-get($border-radius, sm);
-  font-size: 15px;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
+  border-radius: 40px;
+  @include typography("label");
+  transition: background-color .3s;
 
   &:hover {
-    background: map-get($colors, hover-black);
-  }
-
-  @media print {
-    display: none;
+    background: darken(get-color("primary-blue"), 5%);
+    color: white;
   }
 }
 
-// Tags
-.tags {
-  @include flex(row, map-get($spacing, sm));
-  flex-wrap: wrap;
-  margin-bottom: map-get($spacing, xl);
+@media (max-width: 1024px) {
+  .wrapper { padding: 0 get-spacing("md"); }
+  .post {
+    grid-template-columns: 1fr;
+
+    &-meta, &-content { width: 100%; }
+  }
+  .hero {
+    &-title { @include typography("title"); }
+    &-section { margin-top: 150px; }
+  }
+  .video-container { padding-bottom: 75%; }
 }
 
-.tag {
-  @include tag-style;
+@media (max-width: 768px) {
+  .main-container { padding: 0; }
+  .post {
+    &-list {
+      width: 100%;
+      padding: 0 get-spacing("md");
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: get-spacing("md");
+
+    &-meta {
+      order: 2;
+      padding-top: get-spacing("md");
+
+      &::before { display: none; }
+      .date {
+        padding-left: 0;
+        margin-bottom: get-spacing("xs");
+        &::before { display: none; }
+      }
+
+      .title { margin-left: 0; }
+    }
+
+    &-content {
+      order: 3;
+      .post-media { margin-bottom: 0; }
+    }
+  }
+
+  .hero {
+    &-title {
+      font-size: map.get($font-sizes, "lg");
+      padding: 0 get-spacing("md");
+    }
+    &-subtitle {
+      font-size: map.get($font-sizes, "base");
+      padding: 0 get-spacing("md");
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    &-title { font-size: map.get($font-sizes, "base"); }
+    &-subtitle { font-size: map.get($font-sizes, "sm"); }
+  }
+  .post-list { padding: 0 get-spacing("xs"); }
+  .post-media .video-container {
+    width: 125%;
+    video { border-radius: 12px; }
+  }
 }

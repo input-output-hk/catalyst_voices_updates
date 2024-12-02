@@ -1,0 +1,33 @@
+@import 'theme';
+
+// Top Navigation
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(white, 0.9);
+  backdrop-filter: blur(8px);
+  padding: map-get($spacing, sm) 0;
+}
+
+.nav-content {
+  align-content: start;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 map-get($spacing, lg);
+  display: flex;
+  justify-content: start;
+  align-items: left;
+}
+
+.logo {
+  display: flex;
+  align-items: left;
+
+  img {
+    height: 40px;
+    width: auto;
+  }
+}
