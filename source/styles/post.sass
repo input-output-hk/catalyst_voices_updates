@@ -3,12 +3,12 @@
 .post-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: get-spacing("xl");
+  padding: get-spacing("lg");
 }
 
 .post-header {
-  margin-bottom: get-spacing("xl");
-  
+  margin-top: get-spacing("xl");
+
   .publish-date {
     @include typography("label");
     color: get-color("text-light");
@@ -18,7 +18,7 @@
   .post-title {
     @include typography("hero");
     color: get-color("text-dark");
-    margin-bottom: get-spacing("lg");
+    margin-bottom: get-spacing("md");
     font-size: 64px;
     line-height: 1.1;
   }
@@ -28,7 +28,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: get-spacing("xl");
+  margin-bottom: get-spacing("lg");
 
   .author {
     display: flex;
@@ -74,32 +74,66 @@
 }
 
 .post-content {
-  margin-top: get-spacing("xl");
+  margin-top: get-spacing("lg");
 
   img, video {
     width: 100%;
     border-radius: 12px;
-    margin: get-spacing("lg") 0;
+    margin: get-spacing("md") 0;
   }
 
   h1, h2, h3 {
     @include typography("title");
     color: get-color("text-dark");
     margin: get-spacing("lg") 0 get-spacing("md");
+    font-size: 32px;
   }
 
   p {
     @include typography("body");
     color: get-color("text-light");
-    margin-bottom: get-spacing("md");
+    margin-bottom: get-spacing("sm");
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.5;
+  }
+
+  ol, ul {
+    list-style: none;
+    counter-reset: item;
+    padding: 0;
+    margin: get-spacing("md") 0;
+
+    li {
+      counter-increment: item;
+      margin-bottom: get-spacing("sm");
+      color: get-color("text-light");
+      font-size: 18px;
+      line-height: 1.4;
+
+      &::before {
+        content: counter(item) ".";
+        color: get-color("text-dark");
+        font-weight: 700;
+        margin-right: get-spacing("sm");
+      }
+    }
+  }
+
+  strong {
+    color: get-color("text-dark");
+    font-weight: 700;
+  }
+
+  h2 + p,
+  h2 + ol,
+  h2 + ul {
+    margin-top: get-spacing("sm");
   }
 }
 
 @media (max-width: 768px) {
   .post-container {
-    padding: get-spacing("lg") get-spacing("md");
+    padding: get-spacing("md");
   }
 
   .post-header .post-title {
@@ -109,6 +143,6 @@
   .post-meta {
     flex-direction: column;
     align-items: flex-start;
-    gap: get-spacing("md");
+    gap: get-spacing("sm");
   }
 }
