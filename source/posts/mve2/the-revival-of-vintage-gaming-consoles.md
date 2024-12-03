@@ -23,6 +23,8 @@ The vintage gaming community is vibrant and passionate. Online forums, social me
 ## The Quality of Design
 There is also a certain charm and quality to the design of vintage consoles and games that many modern systems lack. The tactile feel of a classic joystick or the satisfying click of a cartridge slot can create a more engaging and immersive gaming experience. Additionally, many retro games are known for their challenging gameplay and timeless design, offering a different kind of satisfaction compared to today's often easier and more streamlined experiences.
 
+![text](https://picsum.photos/800/800)
+
 ## Collectibility and Value
 Vintage gaming consoles and games are also becoming valuable collectibles. Some rare items have seen their value skyrocket, making them attractive investments. This increase in value adds another layer of appeal for collectors and enthusiasts who see vintage gaming as both a hobby and a potential financial opportunity.
 
