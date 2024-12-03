@@ -32,7 +32,8 @@
         <div class="post-meta">
           {% if author %}
           <div class="author">
-            <img src="/images/authors/{{ author | lower | replace(" ", "") }}.jpg" alt="{{ author }}">
+            {# <img src="/images/authors/{{ author | lower | replace(" ", "") }}.jpg" alt="{{ author }}"> #}
+            <img src="https://design-journal.web.app/images/authors/JohnSmith.jpg">
             <div class="author-info">
               <div class="name">{{ author }}</div>
               <div class="role">{{ role | default("Author") }}</div>
