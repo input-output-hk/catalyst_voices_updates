@@ -29,6 +29,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: get-spacing("lg");
+  margin-top: get-spacing("md");
 
   .author {
     display: flex;
@@ -57,20 +58,36 @@
     }
   }
 
-  .share {
-    display: flex;
-    gap: get-spacing("md");
+    .share {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        @include typography("body");
+        color: get-color("text-dark");
+  }
 
-    a {
-      color: get-color("text-light");
-      text-decoration: none;
-      font-size: 16px;
+    .share .icons {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        padding-left: 2px;
+    }
+
+    .share img {
+        width: 20px;
+        height: 20px;
+        opacity: 0.6;
+        filter: grayscale(1);
+    }
+
+  .share a {
+    text-decoration: none;
 
       &:hover {
-        color: get-color("primary-blue");
+        opacity: 0.8;
       }
     }
-  }
 }
 
 .post-content {

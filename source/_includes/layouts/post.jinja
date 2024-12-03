@@ -27,12 +27,12 @@
         </time>
         {% endif %}
 
-        {# <h1 class="post-title">{{ title }}</h1> #}
+
 
         <div class="post-meta">
           {% if author %}
           <div class="author">
-            <img src="/images/authors/{{ author | lower | replace(" ", "-") }}.jpg" alt="{{ author }}">
+            <img src="/images/authors/{{ author | lower | replace(" ", '-') }}.jpg" alt="{{ author }}">
             <div class="author-info">
               <div class="name">{{ author }}</div>
               <div class="role">{{ role | default("Author") }}</div>
@@ -41,9 +41,19 @@
           {% endif %}
 
           <div class="share">
-            <a href="https://twitter.com/share?url={{ url }}" target="_blank">Twitter</a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank">Facebook</a>
-            <a href="https://www.linkedin.com/shareArticle?url={{ url }}" target="_blank">LinkedIn</a>
+           Share
+            <div class="icons">
+            <a href="https://twitter.com/share?url={{ url }}" target="_blank" aria-label="Share on X (Twitter)">
+              <img src="/images/icons/x.svg" alt="X (Twitter) icon">
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?url={{ url }}" target="_blank"
+              aria-label="Share on LinkedIn">
+              <img src="/images/icons/linkedin.svg" alt="LinkedIn icon">
+            </a>
+            <a href="mailto:?subject={{ title }}&body={{ url }}" aria-label="Share via Email">
+              <img src="/images/icons/email.svg" alt="Email icon">
+            </a>
+            </div>
           </div>
         </div>
       </header>
