@@ -45,6 +45,14 @@ body {
 }
 
 .post {
+  &:first-child .post-meta::before {
+    top: 10px;
+  }
+
+  &:last-child .post-meta::before {
+    bottom: 0;
+  }
+
   &-list {
     width: 1000px;
     margin: 0 auto;
