@@ -154,7 +154,7 @@ full example:
 
 **src:** Path to the image file.
 
-``html
+```html
   <img src="image.jpg" alt="Description">
 ```
 
