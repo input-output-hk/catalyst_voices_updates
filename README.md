@@ -124,10 +124,15 @@ Use | to separate columns and --- to create headers:
 ```
 
 •	**controls**: Show player controls.
+
 •	**autoplay** (with muted): Play video automatically.
+
 •	**muted**: Video starts silent.
+
 •	**loop**: Replay automatically after ending.
+
 •	**poster**: Image displayed before playback.
+
 •	**preload** (auto/metadata/none): Hint on how much video to load initially.
 
 full example:
@@ -158,10 +163,13 @@ full example:
   <img src="image.jpg" alt="Description">
 ```
 
-•	**alt**: Alternate text for accessibility.
-•	**width** / height: Control display size in pixels.
-•	**title**: Tooltip text on hover.
-•	**loading** (lazy/eager): Control when the image loads.
+• **alt**: Alternate text for accessibility.
+
+• **width** / height: Control display size in pixels.
+
+• **title**: Tooltip text on hover.
+
+• **loading** (lazy/eager): Control when the image loads.
 
 full example:
 
