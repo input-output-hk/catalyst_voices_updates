@@ -1,6 +1,7 @@
 # Catalyst Voice Updates
 
 - [Catalyst Voice Updates](#catalyst-voice-updates)
+  - [How add a new blog post](#how-add-a-new-blog-post)
   - [How to Use Markdown](#how-to-use-markdown)
     - [Headings](#headings)
     - [Bold and Italic Text](#bold-and-italic-text)
@@ -13,6 +14,23 @@
     - [Tables](#tables)
   - [Add video to HTML](#add-video-to-html)
   - [Add image to HTML](#add-image-to-html)
+
+## How add a new blog post
+
+- Navigate to the [posts](https://github.com/input-output-hk/catalyst_voices_updates/tree/main/source/posts)
+- Press the `Add file` button and select `Create new file`.
+- Create a new markdown and name the file with the following format: `YYYY-MM-DD-title.md`.
+- Add your content in markdown format. To see examples and template, check the [examples](./examples) folder.
+- Press the `Commit changes` button at the bottom of the page.
+- In `Propose changes` dialog select `Create a new branch for this commit and start a pull request`.
+- Press `Save` button.
+- In pull request dialog, add a title and description for your pull request.
+- Press the `Create pull request` button.
+- CI/CD will run and deploy the new blog post to the temporary website.
+- As soon CI/CD is finished, GitHub bot will post  a comment to a new and temporary website link.
+Use this url to preview your blog post and iterate on it.
+- Once you are happy with the blog post, merge the pull request.
+- CI/CD will run again and deploy the new blog post to the main website.
 
 ## How to Use Markdown
 
