@@ -74,11 +74,23 @@ This is **bold** and this is *italic*.
 
 Create hyperlinks by wrapping the link text in brackets [] and following it with the URL in parentheses ():
 
+```markdown
+[Catalyst](https://voices.projectcatalyst.io)
+```
+
+renders as:
+
 [Catalyst](https://voices.projectcatalyst.io)
 
 ### Images
 
 Similar to links, but with an exclamation mark `!` in front:
+
+```markdown
+![Alt text for the image](https://images.unsplash.com/photo-1733428450578-b497f84ee54b?q=80&w=2710&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+```
+
+renders as:
 
 ![Alt text for the image](https://images.unsplash.com/photo-1733428450578-b497f84ee54b?q=80&w=2710&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 
