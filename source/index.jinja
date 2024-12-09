@@ -42,14 +42,20 @@ title: Catalyst Voices Updates
         <article class="post">
           <!-- Left column with metadata -->
           <div class="post-meta">
-            {% if page.data['publishDate'] %}
-            <time class="date" datetime="{{ page.data['publishDate'] }}">
-              {{ page.data['publishDate'] }}
+            {% if page.data['displayDateFormat'] %}
+            <time class="date" datetime="{{ page.data['displayDateFormat'] }}">
+              {{ page.data['displayDateFormat'] }}
             </time>
             {% endif %}
 
             {% if page.data['title'] %}
-            <h2 class="title">{{ page.data['title'] }}</h2>
+            <h2 class="title">
+              {% if page.data['url'] %}
+              <a href="{{ page.data['url'] }}" class="post-title-link">{{ page.data['title'] }}</a>
+              {% else %}
+              {{ page.data['title'] }}
+              {% endif %}
+            </h2>
             {% endif %}
 
             {% if page.data['platforms'] %}

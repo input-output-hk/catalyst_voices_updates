@@ -1,7 +1,8 @@
 ---
 title: The Revival of Vintage Gaming Consoles
 description:  <video src="https://www.shutterstock.com/shutterstock/videos/3589664137/preview/stock-footage-hong-kong-china-shoppers-walk-past-a-poster-showcasing-the-apple-vision-pro-apple.webm"  controls muted> muted</video> Exploring the resurgence of interest in vintage gaming consoles and what makes them so appealing today.
-publishDate: 10 Nov 2024
+publishDate: 2024-11-10
+displayDateFormat: 10 November 2024
 ---
 # The Revival of Vintage Gaming Consoles
 
