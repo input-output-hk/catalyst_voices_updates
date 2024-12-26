@@ -1,5 +1,5 @@
 <!--
-title: Catalyst Voices Updates
+title: Catalyst Updates
 -->
 <!doctype html>
 <html lang="en">
@@ -18,6 +18,7 @@ title: Catalyst Voices Updates
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/home.css">
   <link rel="stylesheet" href="/styles/footer.css">
+
 </head>
 
 <body>
@@ -70,20 +71,15 @@ title: Catalyst Voices Updates
           <!-- Right column with content -->
           <div class="post-content">
             {% if page.data['coverImage'] %}
-            <div class="post-wrapper">
-              <div class="post-media {% if page.data['isVideo'] %}video-container{% endif %}">
-                {% if page.data['isVideo'] %}
-                <div class="video-container">
-                  <video controls playsinline poster="{{ page.data['videoPoster'] }}">
-                    <source src="{{ page.data['coverImage'] }}" type="video/mp4">
-                    Your browser doesn't support HTML5 video.
-                  </video>
-                </div>
-                {% else %}
-                <img src="{{ page.data['coverImage'] }}" alt="{{ page.data['title'] }}" loading="lazy">
-                {% endif %}
-              </div>
-            </div>
+            {% if page.data['isVideo'] %}
+            <video controls playsinline poster="{{ page.data['videoPoster'] }}">
+              <source src="{{ page.data['coverImage'] }}" type="video/mp4">
+              Your browser doesn't support HTML5 video.
+            </video>
+
+            {% else %}
+            <img src="{{ page.data['coverImage'] }}" alt="{{ page.data['title'] }}" loading="lazy">
+            {% endif %}
             {% endif %}
 
             {% if page.data['description'] %}
