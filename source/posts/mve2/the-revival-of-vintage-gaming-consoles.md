@@ -1,6 +1,6 @@
 ---
 title: The Revival of Vintage Gaming Consoles
-description:  <video src="https://www.shutterstock.com/shutterstock/videos/3589664137/preview/stock-footage-hong-kong-china-shoppers-walk-past-a-poster-showcasing-the-apple-vision-pro-apple.webm"  controls muted> muted</video> In recent years, there has been a remarkable resurgence in the popularity of vintage gaming consoles. What was once considered a niche hobby is now becoming a mainstream trend. From the iconic Atari 2600 to the beloved Nintendo 64, these classic systems are capturing the hearts of new and old gamers alike. But what is driving this revival, and what makes these old-school consoles so appealing in today's fast-paced digital world?
+description:  <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Alvaro Reyes"> In recent years, there has been a remarkable resurgence in the popularity of vintage gaming consoles. What was once considered a niche hobby is now becoming a mainstream trend. From the iconic Atari 2600 to the beloved Nintendo 64, these classic systems are capturing the hearts of new and old gamers alike. But what is driving this revival, and what makes these old-school consoles so appealing in today's fast-paced digital world?
 publishDate: 2024-11-10
 displayDateFormat: 10 November 2024
 author: Kate Johnson
