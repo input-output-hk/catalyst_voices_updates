@@ -59,10 +59,10 @@ title: Catalyst Updates
             </h2>
             {% endif %}
 
-            {% if page.data['platforms'] %}
-            <div class="platform-tags">
-              {% for platform in page.data['platforms'] %}
-              <span class="platform-tag">{{ platform }}</span>
+            {% if page.data['labels'] %}
+            <div class="labels">
+              {% for label in page.data['labels'] %}
+              <span class="label">{{ label }}</span>
               {% endfor %}
             </div>
             {% endif %}

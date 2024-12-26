@@ -132,7 +132,6 @@ body {
 }
 
 .read-more {
-  float: right;
   display: inline-flex;
   padding: get-spacing("xs") get-spacing("md");
   background: get-color("primary-blue");
@@ -140,10 +139,9 @@ body {
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  border-radius: 40px;
+  border-radius: 12px;
   @include typography("label");
   transition: background-color .3s;
-  // margin-left: auto;
 
   &:hover {
     background: darken(get-color("primary-blue"), 5%);
