@@ -21,9 +21,9 @@
   <main class="post-container">
     <article>
       <header class="post-header">
-        {% if publishDate %}
-        <time class="publish-date" datetime="{{ publishDate }}">
-          PUBLISHED: {{ publishDate }}
+        {% if displayDateFormat %}
+        <time class="publish-date" datetime="{{ displayDateFormat }}">
+          PUBLISHED: {{ displayDateFormat }}
         </time>
         {% endif %}
 

@@ -1,7 +1,15 @@
 @use 'theme' as *;
 
+body {
+  margin: 0;
+  padding: 0;
+  background: $background-gradient;
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+
 .post-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: get-spacing("lg");
 }
