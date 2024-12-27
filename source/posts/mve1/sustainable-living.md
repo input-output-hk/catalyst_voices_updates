@@ -3,6 +3,7 @@ title: Sustainable Living - Simple Steps to Make a Difference
 description:  <video src="https://www.shutterstock.com/shutterstock/videos/3434489259/preview/stock-footage-creative-office-professional-female-programmer-uses-headphones-working-on-desktop-computer.webm" controls muted></video> In a world facing environmental challenges, adopting a sustainable lifestyle is more important than ever. Sustainable living involves making choices that reduce your impact on the environment and promote the well-being of our planet.
 publishDate: 2024-09-09
 displayDateFormat: 09 September 2024
+author: John Doe
 ---
 
 <video src="https://www.shutterstock.com/shutterstock/videos/3434489259/preview/stock-footage-creative-office-professional-female-programmer-uses-headphones-working-on-desktop-computer.webm"  controls autoplay muted> muted</video>

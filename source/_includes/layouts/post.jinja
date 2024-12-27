@@ -3,12 +3,30 @@
 
 <head>
   <meta charset="utf-8">
+
   <title>{{ title }}</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Latest updates and news from Catalyst">
 
   {{ components.favicon() }}
 
+  <!-- Open Graph -->
+  <meta property="og:title" content="Catalyst: What's New" />
+  <meta property="og:description" content="Learn from our experts and read the latest news on our blog.">
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Catalyst: What's New" />
+  <meta property="og:url" content="https://design-journal.web.app" />
+  <meta property="og:image" content="https://design-journal.web.app/images/meta/og_image.png" />
+
+  <!-- Twitter/X -->
+  <meta name="twitter:title" content="Catalyst: What's New">
+  <meta name="twitter:description" content="Learn from our experts and read the latest news on our blog.">
+  <meta name="twitter:image" content="https://design-journal.web.app/images/meta/twitter_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="canonical" href="https://design-journal.web.app">
   <link rel="stylesheet" href="/styles/theme.css">
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/post.css">
@@ -30,8 +48,7 @@
         <div class="post-meta">
           {% if author %}
           <div class="author">
-            {# <img src="/images/authors/{{ author | lower | replace(" ", "") }}.jpg" alt="{{ author }}"> #}
-            <img src="https://design-journal.web.app/images/authors/JohnSmith.jpg">
+            <img src="/images/authors/{{ author | lower | replace(" ", "") }}.jpg" alt="{{ author }}">
             <div class="author-info">
               <div class="name">{{ author }}</div>
               <div class="role">{{ role | default("Author") }}</div>
