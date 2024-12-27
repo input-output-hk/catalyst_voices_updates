@@ -126,19 +126,19 @@ body {
     list-style: none;
     counter-reset: item;
     padding: 0;
-    margin: get-spacing("md") 0;
+    margin: get-spacing("sm") 0;
 
     li {
       counter-increment: item;
-      margin-bottom: get-spacing("sm");
+       @include typography("body");
       color: get-color("text-light");
       font-size: 18px;
-      line-height: 1.4;
+      line-height: 1.5;
+      margin-bottom: get-spacing("sm");
 
       &::before {
         content: counter(item) ".";
         color: get-color("text-dark");
-        font-weight: 700;
         margin-right: get-spacing("sm");
       }
     }
