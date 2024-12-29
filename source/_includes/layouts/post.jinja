@@ -1,3 +1,5 @@
+{% set BASE_URL = "https://design-journal.web.app" %}
+
 <!doctype html>
 <html lang="en">
 
@@ -11,8 +13,7 @@
 
   {{ components.favicon() }}
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Catalyst: What's New" />
+  <meta property="og:title" content="data-title=" {{ title }}"" />
   <meta property="og:description" content="Learn from our experts and read the latest news on our blog.">
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_US" />
@@ -20,8 +21,7 @@
   <meta property="og:url" content="https://design-journal.web.app" />
   <meta property="og:image" content="https://design-journal.web.app/images/meta/og_image.png" />
 
-  <!-- Twitter/X -->
-  <meta name="twitter:title" content="Catalyst: What's New">
+  <meta name="twitter:title" content="data-title=" {{ title }}"">
   <meta name="twitter:description" content="Learn from our experts and read the latest news on our blog.">
   <meta name="twitter:image" content="https://design-journal.web.app/images/meta/twitter_image.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -48,7 +48,7 @@
         <div class="post-meta">
           {% if author %}
           <div class="author">
-            <img src="/images/authors/{{ author | lower | replace(" ", "") }}.jpg" alt="{{ author }}">
+            <img src="{{BASE_URL}}/images/authors/{{ author | replace(" ", "") }}.jpg" alt="{{ author }}">
             <div class="author-info">
               <div class="name">{{ author }}</div>
               <div class="role">{{ role | default("Author") }}</div>
@@ -59,11 +59,14 @@
           <div class="share">
             Share
             <div class="icons">
-              <a href="https://twitter.com/share?url={{ url }}" target="_blank" aria-label="Share on X (Twitter)">
+
+              <a href="#" rel="nofollow noopener noreferrer" class="share-twitter" data-url="{{ url }}"
+                data-title="{{ title }}" aria-label="Share on X (Twitter)">
                 <img src="/images/icons/x.svg" alt="X (Twitter) icon">
               </a>
-              <a href="https://www.linkedin.com/shareArticle?url={{ url }}" target="_blank"
-                aria-label="Share on LinkedIn">
+
+              <a href="#" rel="nofollow noopener noreferrer" class="share-linkedin" data-url="{{ url }}"
+                data-title="{{ title }}" aria-label="Share on LinkedIn">
                 <img src="/images/icons/linkedin.svg" alt="LinkedIn icon">
               </a>
             </div>
@@ -79,5 +82,42 @@
 
   {{ components.footer() }}
 </body>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const BASE_URL = "https://design-journal.web.app";
+
+    document.querySelectorAll(".share-twitter").forEach(function (element) {
+      element.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const postUrl = element.getAttribute("data-url");
+        const fullUrl = BASE_URL + postUrl;
+        const postTitle = element.getAttribute("data-title");
+
+        const shareUrl = "https://twitter.com/share?url=" +
+          encodeURIComponent(fullUrl) +
+          "&text=" +
+          encodeURIComponent(postTitle);
+
+        window.open(shareUrl, "_blank");
+      });
+    });
+
+
+    document.querySelectorAll(".share-linkedin").forEach(function (element) {
+      element.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const postUrl = element.getAttribute("data-url");
+        const fullUrl = BASE_URL + postUrl;
+        const shareUrl = "https://www.linkedin.com/sharing/share-offsite/?url=" +
+          encodeURIComponent(fullUrl);
+
+        window.open(shareUrl, "_blank");
+      });
+    });
+  });
+</script>
 
 </html>
