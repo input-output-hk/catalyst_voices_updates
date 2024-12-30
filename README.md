@@ -2,6 +2,8 @@
 
 - [Catalyst Voice Updates](#catalyst-voice-updates)
   - [How add a new blog post](#how-add-a-new-blog-post)
+  - [How to update an existing (published) blog post](#how-to-update-an-existing-published-blog-post)
+  - [How to delete an existing (published) blog post](#how-to-delete-an-existing-published-blog-post)
   - [How to Use Markdown](#how-to-use-markdown)
     - [Headings](#headings)
     - [Bold and Italic Text](#bold-and-italic-text)
@@ -14,12 +16,14 @@
     - [Tables](#tables)
   - [Add video to HTML](#add-video-to-html)
   - [Add image to HTML](#add-image-to-html)
+  - [Add youtube video to HTML](#add-youtube-video-to-html)
 
 ## How add a new blog post
 
 - Navigate to the [posts](https://github.com/input-output-hk/catalyst_voices_updates/tree/main/source/posts)
 - Press the `Add file` button and select `Create new file`.
-- Create a new markdown and name the file with the following format: `YYYY-MM-DD-title.md`.
+- Create a new markdown and name the file with the following format: `your-post-title.md`.
+- Add `template` header to the file. Check the [examples/template.md](./examples/template.md).
 - Add your content in markdown format. To see examples and template, check the [examples](./examples) folder.
 - Press the `Commit changes` button at the bottom of the page.
 - In `Propose changes` dialog select `Create a new branch for this commit and start a pull request`.
@@ -31,6 +35,27 @@
 Use this url to preview your blog post and iterate on it.
 - Once you are happy with the blog post, merge the pull request.
 - CI/CD will run again and deploy the new blog post to the main website.
+
+## How to update an existing (published) blog post
+
+- Navigate to the [posts](./source/posts/) select the blog post (*.md file) you want to update.
+- Press the `Edit this file` button.
+- Edit your content in markdown format.
+- Press the `Commit changes` button at the top right of the page.
+- In `Propose changes` dialog select `Create a new branch for this commit and start a pull request`.
+- Press `Propose changes` button.
+- Add a title and description for your pull request.
+- Press the `Create pull request` button.
+- The rest of the process is the same as adding a new blog post.
+
+## How to delete an existing (published) blog post
+
+- Navigate to the [posts](./source/posts/) select the blog post (*.md file) you want to delete.
+- Press `...` button (top right corner) and select `Delete this file`.
+- Press the `Commit changes` button at the top right of the page.
+- In `Propose changes` dialog select `Commit directly to the main branch`.
+- Press `Bypass rules and commit changes` button.
+- The blog post will be deleted from the repository and the website after the CI/CD process is finished.
 
 ## How to Use Markdown
 
@@ -193,4 +218,9 @@ full example:
      height="200"
      title="A peaceful mountain view"
      loading="lazy">
+```
+## Add youtube video to HTML
+
+```html
+<iframe src="https://www.youtube.com/embed/7DYDsx1rMJc?si=9AIAjt5OcNO9sPBG" title="YouTube video player" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 ```
